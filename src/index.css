@@ -1,0 +1,132 @@
+@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap');
+@import "tailwindcss";
+
+:root {
+  --font-cabinet-grotesk: 'Cabinet Grotesk';
+  font-family: var(--font-cabinet-grotesk), Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@theme {
+  --font-sans: var(--font-cabinet-grotesk), Arial, sans-serif;
+  --font-display: var(--font-cabinet-grotesk), Arial, sans-serif;
+  --font-cabinet: var(--font-cabinet-grotesk), Arial, sans-serif;
+  --color-brand-brown: #6a3c20;
+  --color-brand-dark: #161a1d;
+}
+
+html, body, #root {
+  font-family: var(--font-cabinet-grotesk), Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, span, button, input, textarea {
+  font-family: var(--font-cabinet-grotesk), Arial, sans-serif;
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(0.6deg);
+  }
+}
+
+@keyframes floatShadow {
+  0%, 100% {
+    transform: translate3d(45px, -10px, 0) rotate(18deg) skewX(-16deg) scale(0.95);
+    filter: blur(28px) brightness(0) opacity(0.35);
+  }
+  50% {
+    transform: translate3d(52px, -4px, 0) rotate(19deg) skewX(-15deg) scale(0.91);
+    filter: blur(34px) brightness(0) opacity(0.26);
+  }
+}
+
+@keyframes bounceSlow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes marqueeLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marqueeRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marqueeLeft 95s linear infinite;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marqueeRight 95s linear infinite;
+}
+
+.animate-marquee-left:hover,
+.animate-marquee-right:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+.animate-float-shadow {
+  animation: floatShadow 5s ease-in-out infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounceSlow 2s ease-in-out infinite;
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #6a3c20;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 9999px;
+}
