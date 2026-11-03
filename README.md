@@ -1,32 +1,41 @@
-# React + TypeScript + Vite
+# Portfolio — NTEM Dilane La Victoire
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+> Portfolio personnel et vitrine technique de **NTEM Dilane La Victoire**, élève ingénieur en génie logiciel à l'École Nationale Supérieure Polytechnique de Douala (2024–2027).
 
-Currently, two official plugins are available:
+## 🚀 Technologies utilisées
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Frontend** : React 19, TypeScript, Tailwind CSS v4, Framer Motion
+- **Outils & Bundler** : Vite v8, Rolldown / OXC
+- **Icônes & Médias** : Lucide React, WebP optimisé (Lighthouse 100%)
+- **Internationalisation** : Bilingue Français (FR) / Anglais (EN)
+- **Design** : Mobile-first responsive, thème éditorial sombre & cuivre, animations au scroll
 
-## React Compiler
+## 📦 Installation & Lancement
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+# Cloner le dépôt
+git clone https://github.com/Ntem04/Portfolio.git
 
-## Expanding the Oxlint configuration
+# Installer les dépendances
+npm install
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+# Démarrer le serveur de développement
+npm run dev
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+# Démarrer avec support ngrok / tunnel distant
+npm run dev:ngrok
+
+# Compiler la version de production compressée
+npm run build
+
+# Prévisualiser la version de production
+npm run preview:ngrok
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## 👨‍💻 Auteur
+
+- **Nom** : NTEM Dilane La Victoire
+- **École** : École Nationale Supérieure Polytechnique de Douala
+- **GitHub** : [@Ntem04](https://github.com/Ntem04)
+- **LinkedIn** : [Dilane La Victoire NTEM](https://linkedin.com/in/dilane-la-victoire-ntem-396aba385)
+- **Email** : ntemdilane32@gmail.com
