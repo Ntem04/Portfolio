@@ -281,7 +281,7 @@ const CategoryRow: React.FC<CategoryRowProps> = ({
   return (
     <div className="w-full space-y-3.5">
       {/* Category header */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-12 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="text-xs font-mono font-bold text-[#b85d34]">{number}</span>
           <span className="text-xs sm:text-sm font-bold text-[#161a1d] tracking-tight">
@@ -307,7 +307,7 @@ const CategoryRow: React.FC<CategoryRowProps> = ({
 
       {/* Marquee or Grid View */}
       {viewAll ? (
-        <div className="max-w-7xl mx-auto px-6 sm:px-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 pt-1 animate-in fade-in duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5 sm:gap-3 pt-1 animate-in fade-in duration-300">
           {items.map((item, idx) => (
             <TechCard key={`${item.name}-${idx}`} item={item} />
           ))}
@@ -315,8 +315,8 @@ const CategoryRow: React.FC<CategoryRowProps> = ({
       ) : (
         <div className="relative w-full overflow-hidden group">
           {/* Edge gradient fade masks */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-white to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-white to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-28 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-28 bg-gradient-to-l from-white to-transparent z-10" />
 
           {/* Scrolling track */}
           <div
@@ -345,13 +345,13 @@ export const TechStack: React.FC = () => {
       className="relative min-h-screen bg-white text-[#161a1d] py-20 sm:py-28 overflow-hidden flex flex-col justify-center border-t border-black/5"
     >
       {/* Top Section Header */}
-      <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 mb-12 sm:mb-16">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-12 mb-10 sm:mb-16">
         <Reveal direction="up" delay={0.1}>
           <div className="flex flex-col items-start gap-1">
             <span className="text-xs font-mono font-bold tracking-[0.25em] text-[#b85d34] uppercase">
               {t.stack.tag}
             </span>
-            <h2 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-[#161a1d] leading-none">
+            <h2 className="text-4xl xs:text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-[#161a1d] leading-none">
               {t.stack.title}<span className="text-[#b85d34]">.</span>
             </h2>
           </div>

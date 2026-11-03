@@ -9,24 +9,29 @@ export default defineConfig({
     tailwindcss(),
   ],
 
-  // 1. Configuration serveur optimisée pour les tunnels ngrok & accès distant
+  // 1. Configuration serveur 100% optimisée pour ngrok & tunnels distants
   server: {
-    host: true, // Écoute sur 0.0.0.0 pour permettre le routage ngrok
+    host: '0.0.0.0', // Écoute sur toutes les interfaces (0.0.0.0) pour permettre le routage ngrok
     port: 5173,
-    strictPort: true,
-    allowedHosts: true, // Autorise tous les domaines ngrok (ex: *.ngrok-free.app, *.ngrok.io)
+    strictPort: true, // Verrouille le port 5173 sans basculement automatique
+    allowedHosts: true, // Autorise tous les domaines ngrok (*.ngrok-free.app, *.ngrok.io, etc.)
     cors: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
     },
   },
 
   preview: {
-    host: true,
+    host: '0.0.0.0',
     port: 4173,
     strictPort: true,
     allowedHosts: true,
     cors: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
   },
 
   // 2. Évite tout conflit avec un PostCSS hérité d'un dossier parent

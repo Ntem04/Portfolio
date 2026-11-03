@@ -17,10 +17,10 @@ export const Folder3D: React.FC<Folder3DProps> = ({ project, isOpen, onClick }) 
   return (
     <div
       onClick={onClick}
-      className={`relative cursor-pointer transition-all duration-300 bg-transparent p-6 sm:p-8 md:p-10 flex flex-col items-center justify-center select-none group w-full max-w-[460px] mx-auto`}
+      className={`relative cursor-pointer transition-all duration-300 bg-transparent p-2 xs:p-4 sm:p-8 md:p-10 flex flex-col items-center justify-center select-none group w-full max-w-[460px] mx-auto`}
     >
       {/* 3D Folder Container */}
-      <div className="relative w-full max-w-[340px] sm:max-w-[370px] h-[250px] sm:h-[275px] flex items-end justify-center">
+      <div className="relative w-full max-w-[270px] xs:max-w-[320px] sm:max-w-[370px] h-[220px] xs:h-[245px] sm:h-[275px] flex items-end justify-center">
         {/* BACK OF FOLDER (Tab + Back panel) */}
         <div className="absolute inset-x-0 bottom-0 top-3 flex flex-col pointer-events-none">
           {/* Top Tab on Left */}

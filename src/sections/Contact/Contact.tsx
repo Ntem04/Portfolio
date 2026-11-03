@@ -9,23 +9,23 @@ export const Contact: React.FC = () => {
   return (
     <section
       id="contact"
-      className="relative min-h-screen bg-[#eeede7] text-[#161a1d] py-24 sm:py-32 px-8 sm:px-16 lg:px-24 flex flex-col justify-center border-t border-[#6a3c20]/25 overflow-hidden"
+      className="relative min-h-screen bg-[#eeede7] text-[#161a1d] py-16 sm:py-32 px-4 sm:px-12 lg:px-24 flex flex-col justify-center border-t border-[#6a3c20]/25 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 lg:gap-24 items-start">
           {/* Left Column: Heading, description & icon */}
           <Reveal direction="right" delay={0.1}>
             <div className="flex flex-col">
               {/* Tag */}
-              <span className="text-xs font-mono font-bold tracking-[0.2em] text-[#161a1d]/80 uppercase mb-8">
+              <span className="text-xs font-mono font-bold tracking-[0.2em] text-[#161a1d]/80 uppercase mb-5 sm:mb-8">
                 {t.contact.tag}
               </span>
 
               {/* Main Title with square colored dot */}
-              <h2 className="text-6xl sm:text-7xl lg:text-[5.5rem] font-black tracking-tight text-[#161a1d] leading-none mb-6 font-['Cabinet_Grotesk',sans-serif]">
+              <h2 className="text-4xl xs:text-5xl sm:text-7xl lg:text-[5.5rem] font-black tracking-tight text-[#161a1d] leading-none mb-5 sm:mb-6 font-['Cabinet_Grotesk',sans-serif]">
                 {t.contact.title}
                 <span
-                  className="inline-block w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-4.5 lg:h-4.5 bg-[#f65f19] ml-1 align-baseline"
+                  className="inline-block w-3 h-3 sm:w-4 sm:h-4 lg:w-4.5 lg:h-4.5 bg-[#f65f19] ml-1 align-baseline"
                   aria-hidden="true"
                 />
               </h2>

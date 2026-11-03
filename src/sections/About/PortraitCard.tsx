@@ -63,7 +63,7 @@ export const PortraitCard: React.FC = () => {
       {/* =================================================================
           2. LA FORME ARRONDE / CAPSULE (EN MARRON AVEC L'IMAGE À L'INTÉRIEUR)
          ================================================================= */}
-      <div className="relative z-10 w-[260px] sm:w-[290px] md:w-[320px] h-[370px] sm:h-[420px] md:h-[460px] rounded-[130px] sm:rounded-[145px] md:rounded-[160px] overflow-hidden bg-gradient-to-b from-[#7b4626] via-[#6a3c20] to-[#502b15] shadow-[0_20px_50px_rgba(106,60,32,0.35)] border-2 border-[#6a3c20]/40 flex items-end justify-center transition-transform duration-500 group-hover:scale-[1.02]">
+      <div className="relative z-10 w-[230px] xs:w-[260px] sm:w-[290px] md:w-[320px] h-[330px] xs:h-[370px] sm:h-[420px] md:h-[460px] rounded-[115px] xs:rounded-[130px] sm:rounded-[145px] md:rounded-[160px] overflow-hidden bg-gradient-to-b from-[#7b4626] via-[#6a3c20] to-[#502b15] shadow-[0_20px_50px_rgba(106,60,32,0.35)] border-2 border-[#6a3c20]/40 flex items-end justify-center transition-transform duration-500 group-hover:scale-[1.02]">
         {/* Halo de lumière interne chaude en arrière-plan */}
         <div className="absolute top-10 inset-x-8 h-48 rounded-full bg-white/15 blur-2xl pointer-events-none" />
         <div className="absolute -bottom-10 inset-x-4 h-32 rounded-full bg-black/25 blur-xl pointer-events-none" />

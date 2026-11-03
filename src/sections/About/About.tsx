@@ -10,7 +10,7 @@ export const About: React.FC = () => {
   return (
     <section
       id="about"
-      className="relative min-h-screen bg-white text-[#161a1d] py-24 px-6 sm:px-12 lg:px-20 flex flex-col justify-center border-t border-[#161a1d]/10 overflow-hidden"
+      className="relative min-h-screen bg-white text-[#161a1d] py-16 sm:py-24 px-4 sm:px-12 lg:px-20 flex flex-col justify-center border-t border-[#161a1d]/10 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto w-full">
         {/* Section Tag */}
@@ -24,7 +24,7 @@ export const About: React.FC = () => {
           {/* Text Content (7 cols) */}
           <div className="lg:col-span-7 flex flex-col gap-6">
             <Reveal direction="up" delay={0.15}>
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-[#161a1d] leading-[1.05]">
+              <h2 className="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-[#161a1d] leading-[1.08] sm:leading-[1.05]">
                 {t.about.headline}
               </h2>
             </Reveal>

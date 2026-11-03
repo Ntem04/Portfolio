@@ -59,10 +59,10 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToNext }) => {
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="relative min-h-screen w-full bg-[#6a3c20] text-[#f5f4f0] overflow-hidden flex flex-col justify-between select-none pt-20 sm:pt-24"
+      className="relative min-h-screen w-full bg-gradient-to-br from-[#94522a] via-[#61361c] to-[#160903] text-[#f5f4f0] overflow-hidden flex flex-col justify-between select-none pt-20 sm:pt-24"
     >
       {/* =========================================================
-          BACKGROUND : IMAGE BACKOFFICE AVEC LA COULEUR MARRON (#6a3c20)
+          BACKGROUND : IMAGE BACKOFFICE AVEC DÉGRADÉ MARRON ACCENTUÉ
          ========================================================= */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 overflow-hidden">
         {/* Image du backoffice en pleine largeur/hauteur */}
@@ -71,22 +71,26 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToNext }) => {
           alt=""
           role="presentation"
           aria-hidden="true"
-          className="w-full h-full object-cover object-center scale-105 opacity-30 mix-blend-luminosity filter contrast-125 brightness-90"
+          className="w-full h-full object-cover object-center scale-105 opacity-30 mix-blend-luminosity filter contrast-130 brightness-95"
         />
 
-        {/* Teinte de couleur marron (#6a3c20) et dégradés d'ambiance */}
-        <div className="absolute inset-0 bg-[#6a3c20]/75 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#6a3c20] via-[#6a3c20]/40 to-[#6a3c20]/80" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#6a3c20]/90 via-[#6a3c20]/60 to-[#6a3c20]/85" />
+        {/* Dégradé marron principal : du caramel cuivré lumineux (#9c572c) au chocolat espresso profond (#120602) */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#9c572c]/85 via-[#6a3c20]/70 to-[#120602]/95 mix-blend-multiply" />
+
+        {/* Rehaussement de lumière chaude dans le tiers supérieur */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#b86432]/30 via-transparent to-[#0d0401]/85 mix-blend-soft-light" />
+
+        {/* Dégradé radial accentué : halo chaud en haut à gauche vers ombre enveloppante */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_15%_20%,_rgba(200,110,55,0.35)_0%,_transparent_55%,_rgba(14,6,2,0.85)_100%)]" />
       </div>
 
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/4 left-10 w-96 h-96 rounded-full bg-white/5 blur-3xl pointer-events-none z-[1]" />
-      <div className="absolute bottom-1/3 right-10 w-[500px] h-[500px] rounded-full bg-black/20 blur-3xl pointer-events-none z-[1]" />
+      {/* Spots de lumière ambiante pour amplifier le relief du dégradé */}
+      <div className="absolute -top-20 -left-20 w-[550px] h-[550px] rounded-full bg-[#b86230]/30 blur-3xl pointer-events-none z-[1]" />
+      <div className="absolute -bottom-24 -right-24 w-[650px] h-[650px] rounded-full bg-[#0a0301]/75 blur-3xl pointer-events-none z-[1]" />
 
       {/* Main Content Area (Split Grid: Image in Circle Left, Text Right) */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full px-6 sm:px-12 lg:px-16 py-8 sm:py-12 flex-1 flex items-center">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center w-full">
+      <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-12 lg:px-16 py-6 sm:py-12 flex-1 flex items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-8 items-center w-full">
           
           {/* =========================================================
               COLONNE GAUCHE : DÉGRADÉ BLANC-GRIS AVEC TACHES DE PEINTURE QUI S'EFFACE
@@ -94,7 +98,7 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToNext }) => {
           <div className="lg:col-span-5 flex justify-center lg:justify-start order-1">
             <Reveal direction="right" delay={0.15}>
               <div
-                className="relative cursor-pointer group select-none flex items-center justify-center w-[300px] sm:w-[380px] md:w-[430px] h-[370px] sm:h-[440px]"
+                className="relative cursor-pointer group select-none flex items-center justify-center w-[270px] xs:w-[320px] sm:w-[380px] md:w-[430px] h-[330px] xs:h-[380px] sm:h-[440px]"
                 onClick={() => setShowEasterEgg((prev) => !prev)}
               >
               {/* 1. Motif de points en diamant (Polka Dots) sur le côté gauche */}
@@ -273,11 +277,11 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToNext }) => {
 
             {/* Massive Typography: FULLSTACK PROMOTEUR */}
             <Reveal direction="up" delay={0.2}>
-              <div className="mb-6 space-y-1">
-                <h1 className="font-black uppercase text-5xl sm:text-7xl md:text-8xl lg:text-[6.5rem] xl:text-[7.5rem] leading-[0.88] tracking-tighter text-[#f5f4f0] drop-shadow-sm">
+              <div className="mb-5 sm:mb-6 space-y-1">
+                <h1 className="font-black uppercase text-4xl xs:text-5xl sm:text-7xl md:text-8xl lg:text-[6.5rem] xl:text-[7.5rem] leading-[0.9] sm:leading-[0.88] tracking-tighter text-[#f5f4f0] drop-shadow-sm break-words">
                   {personalInfo.title}
                 </h1>
-                <h1 className="font-black uppercase text-5xl sm:text-7xl md:text-8xl lg:text-[6.5rem] xl:text-[7.5rem] leading-[0.88] tracking-tighter text-[#f5f4f0] drop-shadow-sm">
+                <h1 className="font-black uppercase text-4xl xs:text-5xl sm:text-7xl md:text-8xl lg:text-[6.5rem] xl:text-[7.5rem] leading-[0.9] sm:leading-[0.88] tracking-tighter text-[#f5f4f0] drop-shadow-sm break-words">
                   {lang === 'FR' ? personalInfo.subtitle : 'DEVELOPER'}
                 </h1>
               </div>
@@ -285,7 +289,7 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToNext }) => {
 
             {/* Short Pitch / Description */}
             <Reveal direction="up" delay={0.3}>
-              <p className="text-base sm:text-lg text-[#f5f4f0]/80 max-w-xl mb-10 leading-relaxed font-sans font-normal">
+              <p className="text-sm sm:text-base md:text-lg text-[#f5f4f0]/80 max-w-xl mb-8 sm:mb-10 leading-relaxed font-sans font-normal">
                 {t.hero.pitch}
               </p>
             </Reveal>
@@ -310,21 +314,21 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToNext }) => {
           BANDEAU INFÉRIEUR DU HERO (3 BLOCS FIGÉS AVEC SÉPARATEURS VERTICAUX)
          ========================================================= */}
       <Reveal direction="up" delay={0.2} width="full">
-        <div className="relative z-20 w-full border-t border-white/15 bg-[#121316] py-4 px-6 sm:px-12 shadow-2xl">
-          <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 text-center text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#f5f4f0]/90">
-            <div className="flex-1 flex items-center justify-center py-1">
+        <div className="relative z-20 w-full border-t border-white/15 bg-[#121316] py-3.5 sm:py-4 px-4 sm:px-12 shadow-2xl">
+          <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-6 text-center text-[11px] sm:text-xs md:text-sm font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase text-[#f5f4f0]/90">
+            <div className="flex-1 flex items-center justify-center py-0.5">
               <span className="hover:text-white transition-colors">{t.hero.strip1}</span>
             </div>
 
             <div className="hidden sm:block h-4 w-[1.5px] bg-[#f5f4f0]/25 flex-shrink-0" aria-hidden="true" />
 
-            <div className="flex-1 flex items-center justify-center py-1">
+            <div className="flex-1 flex items-center justify-center py-0.5">
               <span className="hover:text-white transition-colors">{t.hero.strip2}</span>
             </div>
 
             <div className="hidden sm:block h-4 w-[1.5px] bg-[#f5f4f0]/25 flex-shrink-0" aria-hidden="true" />
 
-            <div className="flex-1 flex items-center justify-center py-1">
+            <div className="flex-1 flex items-center justify-center py-0.5">
               <span className="hover:text-white transition-colors">{t.hero.strip3}</span>
             </div>
           </div>

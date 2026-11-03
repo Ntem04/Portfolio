@@ -38,7 +38,7 @@ export const Projects: React.FC = () => {
   return (
     <section
       id="projects"
-      className="relative min-h-screen bg-[#eeede7] text-[#161a1d] py-14 sm:py-20 px-6 sm:px-12 lg:px-20 flex flex-col justify-between overflow-hidden"
+      className="relative min-h-screen bg-[#eeede7] text-[#161a1d] py-12 sm:py-20 px-4 sm:px-12 lg:px-20 flex flex-col justify-between overflow-hidden"
     >
       {/* Background Ghost Watermark */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden z-0">
@@ -69,10 +69,10 @@ export const Projects: React.FC = () => {
               {t.projects.tag}
             </span>
             <div className="flex items-baseline">
-              <h2 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#161a1d]">
+              <h2 className="text-3xl xs:text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#161a1d]">
                 {t.projects.title}
               </h2>
-              <span className="text-xs sm:text-sm font-mono font-bold text-[#b85d34] ml-2 -translate-y-3 sm:-translate-y-5">
+              <span className="text-xs sm:text-sm font-mono font-bold text-[#b85d34] ml-2 -translate-y-2 sm:-translate-y-5">
                 ( 0{projectsData.length} )
               </span>
             </div>

@@ -6,10 +6,12 @@
   "scripts": {
     "dev": "vite",
     "dev:host": "vite --host",
+    "dev:ngrok": "vite --host 0.0.0.0 --port 5173",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "preview:host": "vite preview --host"
+    "preview:host": "vite preview --host",
+    "preview:ngrok": "vite preview --host 0.0.0.0 --port 4173"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
