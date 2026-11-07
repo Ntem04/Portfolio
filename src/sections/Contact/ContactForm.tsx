@@ -1,68 +1,145 @@
 import React, { useState } from 'react'
-import { Mail, Check, Loader2 } from 'lucide-react'
+import { Mail, Check, Loader2, AlertCircle, RotateCcw } from 'lucide-react'
 import { useLanguage } from '../../context/LanguageContext'
 
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xljjknjv'
+
 export const ContactForm: React.FC = () => {
-  const { t } = useLanguage()
+  const { lang, t } = useLanguage()
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
+  const [gotcha, setGotcha] = useState('') // Honeypot anti-spam
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   // =========================================================================
-  // GESTION DU CAPTCHA / CLOUDFLARE TURNSTILE (À connecter ultérieurement)
-  // Lorsque vous ajouterez votre clé de site Cloudflare (sitekey) :
-  // 1. Remplacez ce bloc factice par le composant Turnstile officiel
-  // 2. Transmettez le token généré à votre API backend pour validation finale.
+  // GESTION DU CAPTCHA / CLOUDFLARE TURNSTILE
+  // Vous pouvez activer Turnstile directement dans votre tableau de bord Formspree
+  // (Formspree > Forms > Paramètres > Spam Protection > Cloudflare Turnstile).
   // =========================================================================
   const [captchaVerified, setCaptchaVerified] = useState(true)
   const [isVerifying, setIsVerifying] = useState(false)
 
-  // Simulation interactive pour tester avant intégration backend
   const handleToggleCaptcha = () => {
     if (!captchaVerified) {
       setIsVerifying(true)
       setTimeout(() => {
         setIsVerifying(false)
         setCaptchaVerified(true)
-      }, 600)
+      }, 500)
     } else {
       setCaptchaVerified(false)
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
     if (!captchaVerified) {
       alert(t.contact.captchaError)
       return
     }
 
     setLoading(true)
-    setTimeout(() => {
+    setErrorMessage(null)
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          message,
+          _gotcha: gotcha, // Piège à robots : si rempli, Formspree ignore silencieusement
+        }),
+      })
+
+      if (response.ok) {
+        setSubmitted(true)
+        setEmail('')
+        setMessage('')
+      } else {
+        const data = await response.json().catch(() => null)
+        if (data && data.errors && data.errors.length > 0) {
+          const formatted = data.errors
+            .map((err: { message: string }) => err.message)
+            .join(', ')
+          setErrorMessage(formatted)
+        } else {
+          setErrorMessage(
+            lang === 'FR'
+              ? 'Une erreur est survenue lors de l’envoi. Veuillez réessayer.'
+              : 'An error occurred while sending. Please try again.'
+          )
+        }
+      }
+    } catch (err) {
+      console.error('[Formspree] Erreur réseau :', err)
+      setErrorMessage(
+        lang === 'FR'
+          ? 'Impossible de joindre le service de messagerie. Vérifiez votre connexion Internet.'
+          : 'Unable to reach the email service. Please check your Internet connection.'
+      )
+    } finally {
       setLoading(false)
-      setSubmitted(true)
-      setEmail('')
-      setMessage('')
-    }, 700)
+    }
   }
 
   return (
     <form
+      action={FORMSPREE_ENDPOINT}
+      method="POST"
       onSubmit={handleSubmit}
       className="w-full flex flex-col p-6 sm:p-10 border-2 border-[#6a3c20] rounded-2xl bg-white/40 backdrop-blur-sm shadow-sm"
     >
+      {/* Champ Honeypot invisible pour tromper les robots spammeurs */}
+      <input
+        type="text"
+        name="_gotcha"
+        value={gotcha}
+        onChange={(e) => setGotcha(e.target.value)}
+        style={{ display: 'none' }}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+      />
+
       {submitted ? (
-        <div className="p-6 bg-white border border-[#6a3c20]/30 rounded-xl text-emerald-800 flex items-center gap-3 animate-in fade-in">
-          <div className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center flex-shrink-0">
-            <Check className="w-4 h-4 stroke-[3]" />
+        <div className="p-6 bg-white border border-[#6a3c20]/30 rounded-xl text-emerald-800 flex flex-col gap-4 animate-in fade-in">
+          <div className="flex items-center gap-3">
+            <div className="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0">
+              <Check className="w-4 h-4 stroke-[3]" />
+            </div>
+            <p className="text-sm font-semibold">{t.contact.successMsg}</p>
           </div>
-          <p className="text-sm font-medium">
-            {t.contact.successMsg}
-          </p>
+
+          <button
+            type="button"
+            onClick={() => setSubmitted(false)}
+            className="self-start text-xs font-bold text-[#6a3c20] hover:underline flex items-center gap-1.5 pt-2"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            <span>
+              {lang === 'FR'
+                ? 'Envoyer un autre message'
+                : 'Send another message'}
+            </span>
+          </button>
         </div>
       ) : (
         <>
+          {/* Message d'erreur dynamique si Formspree renvoie un refus */}
+          {errorMessage && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-300 rounded-xl text-red-800 text-xs font-medium flex items-center gap-2.5">
+              <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
+              <span>{errorMessage}</span>
+            </div>
+          )}
+
           {/* Champ 1: Votre courriel */}
           <div className="mb-8">
             <label
@@ -73,6 +150,7 @@ export const ContactForm: React.FC = () => {
             </label>
             <input
               id="contact-email"
+              name="email"
               type="email"
               required
               placeholder={t.contact.emailPlaceholder}
@@ -92,6 +170,7 @@ export const ContactForm: React.FC = () => {
             </label>
             <textarea
               id="contact-message"
+              name="message"
               required
               rows={4}
               placeholder={t.contact.messagePlaceholder}
@@ -110,7 +189,7 @@ export const ContactForm: React.FC = () => {
               title="Cliquez pour simuler l'état de validation"
             >
               <div
-                className={`w-7 h-7 rounded-full text-white flex items-center justify-center shadow-sm flex-shrink-0 transition-colors ${
+                className={`w-7 h-7 rounded-full text-white flex items-center justify-center shadow-sm shrink-0 transition-colors ${
                   captchaVerified
                     ? 'bg-[#1ea853]'
                     : isVerifying
@@ -192,7 +271,11 @@ export const ContactForm: React.FC = () => {
             className="w-full bg-[#161a1d] hover:bg-black text-white px-6 py-4 rounded-xl flex items-center justify-between text-sm font-semibold transition-all active:scale-[0.99] disabled:opacity-40 disabled:cursor-not-allowed border border-[#6a3c20]/40 hover:border-[#6a3c20]"
           >
             <span>{loading ? t.contact.sending : t.contact.sendBtn}</span>
-            <Mail className="w-4 h-4 stroke-[2]" />
+            {loading ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              <Mail className="w-4 h-4 stroke-[2]" />
+            )}
           </button>
         </>
       )}

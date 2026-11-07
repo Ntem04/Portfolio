@@ -157,7 +157,7 @@ export const translations: Record<Language, Translations> = {
       school: 'École Nationale Supérieure Polytechnique',
       stageInfo: 'Stage ingénieur recherché (4 à 5 mois)',
       stageDates: 'À partir du 2 février 2027 • Douala',
-      skillsPill: 'Génie Logiciel / React, Node.js & Rust',
+      skillsPill: 'Génie Logiciel / React, Node.js & Réseaux',
     },
     stack: {
       tag: '04 / THE TOOLKIT',

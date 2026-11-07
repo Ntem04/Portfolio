@@ -72,7 +72,7 @@ export const Navbar: React.FC = () => {
             : 'bg-transparent'
         }`}
       >
-        {/* Brand Icon + Name (left) */}
+        {/* Brand Icon + Name (left) - Largeur réservée fixe pour éviter tout décalage */}
         <a
           href="#"
           className="flex items-center gap-2 xs:gap-3 group focus:outline-none select-none shrink-0"
@@ -89,15 +89,15 @@ export const Navbar: React.FC = () => {
             />
           </div>
 
-          {/* Nom animé qui s'écrit et s'efface seul avec curseur clignotant */}
-          <span className="font-bold text-xs sm:text-sm tracking-tight text-[#f5f4f0] group-hover:text-white transition-colors inline-flex items-center max-w-31.25 xs:max-w-[160px] sm:max-w-none truncate">
+          {/* Nom animé : conteneur de largeur figée pour ne jamais faire bouger le reste de la navbar */}
+          <span className="font-bold text-xs sm:text-sm tracking-tight text-[#f5f4f0] group-hover:text-white transition-colors inline-flex items-center w-[140px] xs:w-[165px] sm:w-[200px] shrink-0">
             <span className="truncate">{displayText}</span>
             <span className="inline-block w-0.5 h-3 sm:h-4 bg-white ml-0.5 animate-pulse shrink-0" />
           </span>
         </a>
 
-        {/* Navigation links (center) : desktop uniquement */}
-        <nav className="hidden lg:flex items-center gap-1.5 xl:gap-3 text-[13px] font-semibold text-[#f5f4f0] tracking-tight">
+        {/* Navigation links (center) : desktop uniquement - ANCRÉ RIGIDEMENT AU CENTRE */}
+        <nav className="hidden lg:flex items-center gap-1.5 xl:gap-3 text-[13px] font-semibold text-[#f5f4f0] tracking-tight absolute left-1/2 -translate-x-1/2 pointer-events-auto">
           <a
             href="#projects"
             className="px-3 py-1.5 rounded-lg transition-all text-[#f5f4f0] hover:text-brand-brown hover:bg-[#f5f4f0]"
