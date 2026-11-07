@@ -333,29 +333,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
                     photoLoaded ? 'opacity-100' : 'opacity-80 blur-xs'
                   }`}
                 />
-
-                {/* Badge d'aide visuelle si c'est le placeholder par défaut */}
-                {!customPhotoUrl && (
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end justify-center pb-2 pointer-events-none">
-                    <span className="text-[9px] uppercase tracking-wider font-bold text-amber-200/90 bg-black/60 px-2 py-0.5 rounded-full backdrop-blur-xs">
-                      Photo Pro
-                    </span>
-                  </div>
-                )}
               </div>
-
-              {/* Badge d'état flottant : Disponible pour stage */}
-              <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.35, type: 'spring' }}
-                className="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#160903]/90 border border-[#d97736]/60 rounded-full px-3 py-1 shadow-lg backdrop-blur-md flex items-center gap-1.5"
-              >
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping inline-block" />
-                <span className="text-[10px] font-semibold text-white/90">
-                  {lang === 'FR' ? 'Stage Fév. 2027' : 'Internship Feb 2027'}
-                </span>
-              </motion.div>
             </motion.div>
 
             {/* MESSAGE DE BIENVENUE ÉDITORIAL & IMPACTANT */}
