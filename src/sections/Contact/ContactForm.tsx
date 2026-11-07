@@ -4,6 +4,29 @@ import { useLanguage } from '../../context/LanguageContext'
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xljjknjv'
 
+// =============================================================================
+// SPINNER RADAR OFFICIEL CLOUDFLARE TURNSTILE (8 POINTS EN CERCLE)
+// =============================================================================
+const CloudflareRadarSpinner: React.FC = () => (
+  <svg
+    className="w-5 h-5 animate-spin shrink-0"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{ animationDuration: '0.85s' }}
+  >
+    {/* 8 points disposés en cercle (rayon ~8.5) avec dégradé d'opacité vert radar */}
+    <circle cx="12" cy="3.5" r="1.6" fill="#1ea853" opacity="1.0" />
+    <circle cx="18" cy="6" r="1.6" fill="#1ea853" opacity="0.85" />
+    <circle cx="20.5" cy="12" r="1.6" fill="#1ea853" opacity="0.70" />
+    <circle cx="18" cy="18" r="1.6" fill="#1ea853" opacity="0.55" />
+    <circle cx="12" cy="20.5" r="1.6" fill="#1ea853" opacity="0.40" />
+    <circle cx="6" cy="18" r="1.6" fill="#1ea853" opacity="0.25" />
+    <circle cx="3.5" cy="12" r="1.6" fill="#1ea853" opacity="0.15" />
+    <circle cx="6" cy="6" r="1.6" fill="#1ea853" opacity="0.08" />
+  </svg>
+)
+
 export const ContactForm: React.FC = () => {
   const { lang, t } = useLanguage()
   const [email, setEmail] = useState('')
@@ -22,14 +45,14 @@ export const ContactForm: React.FC = () => {
   const [isVerifying, setIsVerifying] = useState(true)
 
   useEffect(() => {
-    // Lancement automatique du contrôle de sécurité Cloudflare (durée réaliste 1.2s)
+    // Lancement automatique du contrôle de sécurité Cloudflare (durée réaliste 1.8s)
     setIsVerifying(true)
     setCaptchaVerified(false)
 
     const timer = setTimeout(() => {
       setIsVerifying(false)
       setCaptchaVerified(true)
-    }, 1200)
+    }, 1800)
 
     return () => clearTimeout(timer)
   }, [])
@@ -40,7 +63,7 @@ export const ContactForm: React.FC = () => {
     setTimeout(() => {
       setIsVerifying(false)
       setCaptchaVerified(true)
-    }, 800)
+    }, 1400)
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -192,49 +215,65 @@ export const ContactForm: React.FC = () => {
             />
           </div>
 
-          {/* Badge Cloudflare Turnstile */}
-          <div className="bg-white border border-[#6a3c20]/35 p-4 rounded-xl flex items-center justify-between mb-4 shadow-sm select-none">
-            {/* Partie gauche : Coche verte interactive */}
+          {/* Widget Cloudflare Turnstile officiel pixel-perfect (conforme à la vidéo) */}
+          <div className="bg-white border border-[#6a3c20]/25 rounded-xl px-4 py-3 flex items-center justify-between mb-5 shadow-xs select-none min-h-[66px]">
+            {/* Partie gauche : Spinner radar 8 points vert puis coche de succès */}
             <div
               onClick={handleToggleCaptcha}
               className="flex items-center gap-3 cursor-pointer group"
-              title="Cliquez pour simuler l'état de validation"
+              title={lang === 'FR' ? 'Cliquer pour revérifier' : 'Click to re-verify'}
             >
-              <div
-                className={`w-7 h-7 rounded-full text-white flex items-center justify-center shadow-sm shrink-0 transition-all duration-300 ${
-                  captchaVerified
-                    ? 'bg-[#1ea853] scale-100 ring-4 ring-[#1ea853]/20'
-                    : isVerifying
-                    ? 'bg-amber-500 scale-95 animate-pulse'
-                    : 'bg-slate-200 border border-slate-400 text-slate-400'
-                }`}
-              >
-                {isVerifying ? (
-                  <Loader2 className="w-4 h-4 animate-spin text-white" />
-                ) : captchaVerified ? (
-                  <Check className="w-4 h-4 stroke-[3] animate-in zoom-in-50 duration-200" />
-                ) : null}
-              </div>
-              <span className="text-sm font-medium text-[#161a1d]">
-                {isVerifying
-                  ? t.contact.captchaVerifying
-                  : captchaVerified
-                  ? t.contact.captchaSuccess
-                  : t.contact.captchaPrompt}
-              </span>
+              {isVerifying ? (
+                <div className="flex items-center gap-3">
+                  <CloudflareRadarSpinner />
+                  <div className="flex flex-col text-left leading-tight">
+                    <span className="text-sm font-normal text-slate-800">
+                      {lang === 'FR' ? 'Vérification en cours...' : 'Verifying...'}
+                    </span>
+                    <span className="text-[11px] text-slate-500 mt-0.5">
+                      {lang === 'FR' ? 'Bloqué ? ' : 'Stuck? '}
+                      <a
+                        href="https://support.cloudflare.com/hc/en-us/articles/5425244583181"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline text-slate-700 hover:text-black font-medium"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        {lang === 'FR' ? 'Dépannage' : 'Troubleshoot'}
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              ) : captchaVerified ? (
+                <div className="flex items-center gap-3">
+                  <div className="w-5 h-5 rounded-full bg-[#1ea853] text-white flex items-center justify-center shrink-0 shadow-xs animate-in zoom-in-75 duration-300">
+                    <Check className="w-3.5 h-3.5 stroke-[3]" />
+                  </div>
+                  <span className="text-sm font-medium text-slate-900">
+                    {lang === 'FR' ? 'Succès !' : 'Success!'}
+                  </span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-3">
+                  <div className="w-5 h-5 rounded-full bg-slate-200 border border-slate-400 text-slate-400 shrink-0" />
+                  <span className="text-sm font-normal text-slate-600">
+                    {lang === 'FR' ? 'Cliquer pour vérifier' : 'Click to verify'}
+                  </span>
+                </div>
+              )}
             </div>
 
-            {/* Partie droite : Logo Cloudflare cliquable vers le site officiel */}
-            <div className="flex flex-col items-end">
+            {/* Partie droite : Logo Cloudflare avec liens légaux officiels */}
+            <div className="flex flex-col items-end shrink-0 pl-3">
               <a
                 href="https://www.cloudflare.com/products/turnstile/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 hover:opacity-80 transition-opacity"
+                className="flex items-center gap-1.5 hover:opacity-85 transition-opacity"
                 title="Découvrir Cloudflare Turnstile (Site officiel)"
               >
                 <svg
-                  className="w-6 h-4"
+                  className="w-7 h-4.5"
                   viewBox="0 0 56 36"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -248,18 +287,18 @@ export const ContactForm: React.FC = () => {
                     fill="#F6821F"
                   />
                 </svg>
-                <span className="text-[10px] font-black tracking-wider text-[#161a1d] font-mono">
+                <span className="text-[11px] font-black tracking-wider text-[#161a1d] font-sans">
                   CLOUDFLARE
                 </span>
               </a>
 
               {/* Liens légaux officiels */}
-              <div className="text-[9px] text-[#161a1d]/60 font-mono mt-0.5">
+              <div className="text-[9px] text-slate-500 font-sans mt-0.5">
                 <a
                   href="https://www.cloudflare.com/privacypolicy/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:underline hover:text-[#161a1d]"
+                  className="hover:underline hover:text-slate-800"
                 >
                   Privacy
                 </a>
@@ -268,7 +307,7 @@ export const ContactForm: React.FC = () => {
                   href="https://support.cloudflare.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:underline hover:text-[#161a1d]"
+                  className="hover:underline hover:text-slate-800"
                 >
                   Help
                 </a>
