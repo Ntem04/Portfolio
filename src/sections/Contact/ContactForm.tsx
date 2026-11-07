@@ -74,7 +74,9 @@ export const ContactForm: React.FC = () => {
         setMessage('')
       } else {
         const data = await response.json().catch(() => null)
-        if (data && data.errors && data.errors.length > 0) {
+        if (data && typeof data.error === 'string') {
+          setErrorMessage(data.error)
+        } else if (data && data.errors && data.errors.length > 0) {
           const formatted = data.errors
             .map((err: { message: string }) => err.message)
             .join(', ')
